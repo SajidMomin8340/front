@@ -29,7 +29,7 @@ const EditCompany = () => {
   const handleEditCompany = () => {
     setLoading(true);
     axios
-      .put(`https://back-seaj.onrender.com/company/${companyId}`, { name: companyName })
+      .put(`https://back-528k.onrender.com/company/${companyId}`, { name: companyName })
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Company edited successfully', { variant: 'success' });

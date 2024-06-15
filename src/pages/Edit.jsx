@@ -49,7 +49,7 @@ const Edit = () => {
     };
     setLoading(true);
     axios
-      .put(`http://localhost:5050/items/${itemId}`, data)
+      .put(`https://back-528k.onrender.com/items/${itemId}`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item edited successfully', { variant: 'success' });
