@@ -11,7 +11,7 @@ const HighBalanceItems = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://back-528k.onrender.com/items?companyId=${companyId}`) // Assuming API supports filtering by companyId
+      .get(`https://back-dvw3.onrender.com/items?companyId=${companyId}`) // Assuming API supports filtering by companyId
       .then((response) => {
         const highBalanceItems = response.data.data.filter(item => item.balance > 200);
         setItems(highBalanceItems);

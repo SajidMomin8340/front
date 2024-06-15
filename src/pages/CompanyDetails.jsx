@@ -13,7 +13,7 @@ const CompanyDetails = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('https://back-528k.onrender.com/company') // Ensure this matches your backend route
+      .get('https://back-dvw3.onrender.com/company') // Ensure this matches your backend route
       .then((response) => {
         const fetchedCompanies = response.data.data;
         setCompanies(fetchedCompanies);

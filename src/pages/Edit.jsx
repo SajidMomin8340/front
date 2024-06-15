@@ -17,7 +17,7 @@ const Edit = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://back-528k.onrender.com/items/${itemId}`)
+    axios.get(`https://back-dvw3.onrender.com/items/${itemId}`)
       .then((response) => {
         const { date, invoice_no, credit, debit, vehicle_no } = response.data;
         // Format the date to yyyy-MM-dd
@@ -49,7 +49,7 @@ const Edit = () => {
     };
     setLoading(true);
     axios
-      .put(`https://back-528k.onrender.com/items/${itemId}`, data)
+      .put(`https://back-dvw3.onrender.com/items/${itemId}`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item edited successfully', { variant: 'success' });

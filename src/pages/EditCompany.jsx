@@ -13,7 +13,7 @@ const EditCompany = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://back-528k.onrender.com/company/${companyId}`)
+    axios.get(`https://back-dvw3.onrender.com/company/${companyId}`)
       .then((response) => {
         const { name } = response.data;
         setCompanyName(name);
@@ -29,7 +29,7 @@ const EditCompany = () => {
   const handleEditCompany = () => {
     setLoading(true);
     axios
-      .put(`https://back-528k.onrender.com/company/${companyId}`, { name: companyName })
+      .put(`https://back-dvw3.onrender.com/company/${companyId}`, { name: companyName })
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Company edited successfully', { variant: 'success' });

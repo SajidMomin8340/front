@@ -1,17 +1,14 @@
-// Create.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom'; // Import useNavigate and useParams
 import Spinner from '../../components/Spinner';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
 import { MdOutlineAddBox, MdOutlineDelete, MdSearch } from 'react-icons/md';
 import { useSnackbar } from 'notistack';
-import { saveAs } from 'file-saver';
-import { PDFViewer } from '@react-pdf/renderer';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import * as XLSX from 'xlsx';
 
+import * as XLSX from 'xlsx';
 
 const Create = () => {
   const [date, setDate] = useState('');
@@ -21,7 +18,7 @@ const Create = () => {
   const [vehicle_no, setVehicleNo] = useState('');
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null); // State to hold the uploaded file
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
   const { enqueueSnackbar } = useSnackbar();
   const { companyId } = useParams(); // Get companyId from URL parameters
 
@@ -38,7 +35,7 @@ const Create = () => {
     };
     setLoading(true);
     axios
-      .post('https://back-528k.onrender.com/items', data)
+      .post('https://back-dvw3.onrender.com/items', data) // Update with your backend URL
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item Created successfully', { variant: 'success' });
@@ -81,7 +78,7 @@ const Create = () => {
           vehicle_no: item.vehicle_no,
           company_id: companyId // Use companyId from URL parameters
         };
-        return axios.post('https://back-528k.onrender.com/items', data);
+        return axios.post('https://back-dvw3.onrender.com/items', data); // Update with your backend URL
       }))
         .then(() => {
           setLoading(false);

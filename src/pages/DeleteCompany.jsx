@@ -13,7 +13,7 @@ const DeleteCompany = () => {
   const handleDeleteCompany = () => {
     setLoading(true);
     axios
-      .delete(`https://back-528k.onrender.com/company/${companyId}`)
+      .delete(`https://back-dvw3.onrender.com/company/${companyId}`)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Company deleted successfully', { variant: 'success' });

@@ -13,7 +13,7 @@ const Delete = () => {
   const handleDeleteItem = () => {
     setLoading(true);
     axios
-      .delete(`https://back-528k.onrender.com/items/${itemId}`)
+      .delete(`https://back-dvw3.onrender.com/items/${itemId}`)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item deleted successfully', { variant: 'success' });

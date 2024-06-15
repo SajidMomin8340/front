@@ -21,7 +21,7 @@ const Home = () => {
 useEffect(() => {
   setLoading(true);
   axios
-      .get(`https://back-528k.onrender.com/items?companyId=${companyId}`)
+      .get(`https://back-dvw3.onrender.com/items?companyId=${companyId}`)
       .then((response) => {
           const fetchedItems = response.data.data;
           setItems(fetchedItems);

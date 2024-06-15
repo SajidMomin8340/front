@@ -11,7 +11,7 @@ const Show = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://back-528k.onrender.com/items/${itemId}`)
+      .get(`https://back-dvw3.onrender.com/items/${itemId}`)
       .then((response) => {
         setItem(response.data);
         setLoading(false);
