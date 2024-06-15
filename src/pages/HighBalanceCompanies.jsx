@@ -11,7 +11,7 @@ const HighBalanceCompanies = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('https://back-seaj.onrender.com/items/items') // Updated route to fetch items with balance > 200
+      .get('https://back-528k.onrender.com/items/items') // Updated route to fetch items with balance > 200
       .then((response) => {
         const highBalanceItems = response.data.data;
         setItems(highBalanceItems);

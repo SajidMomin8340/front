@@ -38,7 +38,7 @@ const Create = () => {
     };
     setLoading(true);
     axios
-      .post('https://back-hhlp.onrender.com/items', data)
+      .post('https://back-528k.onrender.com/items', data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item Created successfully', { variant: 'success' });
@@ -81,7 +81,7 @@ const Create = () => {
           vehicle_no: item.vehicle_no,
           company_id: companyId // Use companyId from URL parameters
         };
-        return axios.post('https://back-hhlp.onrender.com/items', data);
+        return axios.post('https://back-528k.onrender.com/items', data);
       }))
         .then(() => {
           setLoading(false);

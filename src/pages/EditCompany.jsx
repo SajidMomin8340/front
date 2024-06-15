@@ -13,7 +13,7 @@ const EditCompany = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://back-hhlp.onrender.com/company/${companyId}`)
+    axios.get(`https://back-528k.onrender.com/company/${companyId}`)
       .then((response) => {
         const { name } = response.data;
         setCompanyName(name);

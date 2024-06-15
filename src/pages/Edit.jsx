@@ -17,7 +17,7 @@ const Edit = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://back-hhlp.onrender.com/items/${itemId}`)
+    axios.get(`https://back-528k.onrender.com/items/${itemId}`)
       .then((response) => {
         const { date, invoice_no, credit, debit, vehicle_no } = response.data;
         // Format the date to yyyy-MM-dd

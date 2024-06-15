@@ -13,7 +13,7 @@ const CreateCompany = () => {
   const handleSaveCompany = () => {
     setLoading(true);
     axios
-      .post('https://back-hhlp.onrender.com/company', { name: companyName })
+      .post('https://back-528k.onrender.com/company', { name: companyName })
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Company Created successfully', { variant: 'success' });
