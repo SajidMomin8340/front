@@ -11,7 +11,7 @@ const Show = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://back-seaj.onrender.com/items/${itemId}`)
+      .get(`https://back-hhlp.onrender.com/items/${itemId}`)
       .then((response) => {
         setItem(response.data);
         setLoading(false);
