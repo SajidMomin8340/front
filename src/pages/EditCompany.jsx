@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 
 const EditCompany = () => {
   const [companyName, setCompanyName] = useState('');
+  const [companyAddress, setCompanyAddress] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { companyId } = useParams(); // Use companyId to match the route parameter
@@ -13,10 +14,11 @@ const EditCompany = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://back-dvw3.onrender.com/company/${companyId}`)
+    axios.get(`http://localhost:5050/company/${companyId}`)
       .then((response) => {
-        const { name } = response.data;
+        const { name, address } = response.data;
         setCompanyName(name);
+        setCompanyAddress(address || ''); // Set address if available, handle null case
         setLoading(false);
       })
       .catch((error) => {
@@ -24,12 +26,12 @@ const EditCompany = () => {
         enqueueSnackbar('An error occurred. Please check console.', { variant: 'error' });
         console.error(error);
       });
-  }, [companyId]);
+  }, [companyId, enqueueSnackbar]);
 
   const handleEditCompany = () => {
     setLoading(true);
     axios
-      .put(`https://back-dvw3.onrender.com/company/${companyId}`, { name: companyName })
+      .put(`http://localhost:5050/company/${companyId}`, { name: companyName, address: companyAddress })
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Company edited successfully', { variant: 'success' });
@@ -48,11 +50,22 @@ const EditCompany = () => {
       {loading && <Spinner />}
       <div className="bg-white p-8 rounded-lg shadow-lg">
         <div className="mb-6">
-          <label className="block text-xl font-medium text-gray-700 mb-2">Company Name</label>
+          <label htmlFor="companyName" className="block text-xl font-medium text-gray-700 mb-2">Company Name</label>
           <input
+            id="companyName"
             type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
+            className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="companyAddress" className="block text-xl font-medium text-gray-700 mb-2">Address</label>
+          <input
+            id="companyAddress"
+            type="text"
+            value={companyAddress}
+            onChange={(e) => setCompanyAddress(e.target.value)}
             className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
           />
         </div>

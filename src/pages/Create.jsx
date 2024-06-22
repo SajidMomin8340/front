@@ -13,6 +13,7 @@ import * as XLSX from 'xlsx';
 const Create = () => {
   const [date, setDate] = useState('');
   const [invoice_no, setInvoiceNo] = useState('');
+  const [type, setType] = useState(''); // Add type state
   const [credit, setCredit] = useState('');
   const [debit, setDebit] = useState('');
   const [vehicle_no, setVehicleNo] = useState('');
@@ -27,15 +28,16 @@ const Create = () => {
     const data = {
       date,
       invoice_no,
+      type,
       credit,
       debit,
-      balance: calculatedBalance, // Calculate balance here
+      balance: calculatedBalance,
       vehicle_no,
-      company_id: companyId // Use companyId from URL parameters
+      company_id: companyId
     };
     setLoading(true);
     axios
-      .post('https://back-dvw3.onrender.com/items', data) // Update with your backend URL
+      .post('http://localhost:5050/items', data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item Created successfully', { variant: 'success' });
@@ -72,13 +74,14 @@ const Create = () => {
         const data = {
           date: item.date,
           invoice_no: item.invoice_no,
+          type: item.type,
           credit: item.credit,
           debit: item.debit,
-          balance: calculatedBalance, // Calculate balance here
+          balance: calculatedBalance,
           vehicle_no: item.vehicle_no,
-          company_id: companyId // Use companyId from URL parameters
+          company_id: companyId
         };
-        return axios.post('https://back-dvw3.onrender.com/items', data); // Update with your backend URL
+        return axios.post('http://localhost:5050/items', data);
       }))
         .then(() => {
           setLoading(false);
@@ -116,6 +119,18 @@ const Create = () => {
             onChange={(e) => setInvoiceNo(e.target.value)}
             className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
           />
+        </div>
+        <div className="mb-6">
+          <label className="block text-xl font-medium text-gray-700 mb-2">Type</label>
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
+          >
+            <option value="">Select Type</option>
+            <option value="Drum">Drum</option>
+            <option value="Cargo">Cargo</option>
+          </select>
         </div>
         <div className="mb-6">
           <label className="block text-xl font-medium text-gray-700 mb-2">Credit</label>

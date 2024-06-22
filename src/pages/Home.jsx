@@ -17,23 +17,22 @@ const Home = () => {
   const [filteredItems, setFilteredItems] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
 
- // Example of how you fetch items in useEffect
-useEffect(() => {
-  setLoading(true);
-  axios
-      .get(`https://back-dvw3.onrender.com/items?companyId=${companyId}`)
+  // Example of how you fetch items in useEffect
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:5050/items?companyId=${companyId}`)
       .then((response) => {
-          const fetchedItems = response.data.data;
-          setItems(fetchedItems);
-          setFilteredItems(fetchedItems); // Initialize filtered items with all items
-          setLoading(false);
+        const fetchedItems = response.data.data;
+        setItems(fetchedItems);
+        setFilteredItems(fetchedItems); // Initialize filtered items with all items
+        setLoading(false);
       })
       .catch((error) => {
-          console.error('Error fetching items:', error);
-          setLoading(false);
+        console.error('Error fetching items:', error);
+        setLoading(false);
       });
-}, [companyId]);
-
+  }, [companyId]);
 
   const handleSearch = () => {
     const lowercasedQuery = searchQuery.toLowerCase();
@@ -61,6 +60,7 @@ useEffect(() => {
       'Sr. No': index + 1,
       Date: formatDate(item.date),
       'Invoice Number': item.invoice_no,
+      Type: item.type, // Include type field
       Credit: item.credit,
       Debit: item.debit,
       Balance: item.balance,
@@ -127,6 +127,9 @@ useEffect(() => {
                   Invoice Number
                 </th>
                 <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">
+                  Type
+                </th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">
                   Credit
                 </th>
                 <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">
@@ -157,6 +160,9 @@ useEffect(() => {
                   </td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">
                     {item.invoice_no}
+                  </td>
+                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">
+                    {item.type}
                   </td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">
                     {item.credit}
@@ -198,5 +204,4 @@ useEffect(() => {
     </div>
   );
 };
-
 export default Home;

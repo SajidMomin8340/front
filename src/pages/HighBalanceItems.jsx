@@ -11,7 +11,7 @@ const HighBalanceItems = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://back-dvw3.onrender.com/items?companyId=${companyId}`) // Assuming API supports filtering by companyId
+      .get(`http://localhost:5050/items?companyId=${companyId}`) // Assuming API supports filtering by companyId
       .then((response) => {
         const highBalanceItems = response.data.data.filter(item => item.balance > 200);
         setItems(highBalanceItems);
@@ -41,27 +41,29 @@ const HighBalanceItems = () => {
       ) : (
         <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
           <table className="min-w-full border-collapse block md:table">
-            <thead className="block md:table-header-group">
-              <tr className="border border-gray-200 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Sr. No</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Date</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Invoice Number</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Credit</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Debit</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Balance</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Vehicle Number</th>
+            <thead>
+              <tr className="border border-gray-200">
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Sr. No</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Date</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Invoice Number</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Type</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Credit</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Debit</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Balance</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Vehicle Number</th>
               </tr>
             </thead>
-            <tbody className="block md:table-row-group">
+            <tbody>
               {items.map((item, index) => (
-                <tr key={item._id} className="bg-white border border-gray-200 md:border-none block md:table-row">
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{index + 1}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{formatDate(item.date)}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.invoice_no}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.credit}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.debit}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.balance}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.vehicle_no}</td>
+                <tr key={item._id} className="bg-white border border-gray-200">
+                  <td className="p-2 text-gray-800">{index + 1}</td>
+                  <td className="p-2 text-gray-800">{formatDate(item.date)}</td>
+                  <td className="p-2 text-gray-800">{item.invoice_no}</td>
+                  <td className="p-2 text-gray-800">{item.type}</td>
+                  <td className="p-2 text-gray-800">{item.credit}</td>
+                  <td className="p-2 text-gray-800">{item.debit}</td>
+                  <td className="p-2 text-gray-800">{item.balance}</td>
+                  <td className="p-2 text-gray-800">{item.vehicle_no}</td>
                 </tr>
               ))}
             </tbody>

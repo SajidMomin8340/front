@@ -13,7 +13,7 @@ const CompanyDetails = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('https://back-dvw3.onrender.com/company') // Ensure this matches your backend route
+      .get('http://localhost:5050/company')
       .then((response) => {
         const fetchedCompanies = response.data.data;
         setCompanies(fetchedCompanies);
@@ -63,18 +63,20 @@ const CompanyDetails = () => {
         <div className="overflow-x-auto bg-white shadow-lg rounded-lg mt-8">
           <table className="min-w-full border-collapse block md:table">
             <thead className="block md:table-header-group">
-              <tr className="border border-gray-200 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Sr. No</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Company Name</th>
-                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">Operations</th>
+              <tr className="border border-gray-200 md:border-none">
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Sr. No</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Company Name</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Address</th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200">Operations</th>
               </tr>
             </thead>
             <tbody className="block md:table-row-group">
               {filteredCompanies.map((company, index) => (
-                <tr key={company._id} className="bg-white border border-gray-200 md:border-none block md:table-row">
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{index + 1}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{company.name}</td>
-                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">
+                <tr key={company._id} className="bg-white border border-gray-200 md:border-none">
+                  <td className="p-2 text-gray-800">{index + 1}</td>
+                  <td className="p-2 text-gray-800">{company.name}</td>
+                  <td className="p-2 text-gray-800">{company.address}</td>
+                  <td className="p-2 text-gray-800">
                     <div className="flex justify-center gap-4">
                       <Link to={`/company/${company._id}`}>
                         <BsInfoCircle className="text-2xl text-green-800 hover:text-green-600 transition-colors" />

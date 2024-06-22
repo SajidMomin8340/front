@@ -7,6 +7,7 @@ import { useSnackbar } from 'notistack';
 const Edit = () => {
   const [date, setDate] = useState('');
   const [invoiceNo, setInvoiceNo] = useState('');
+  const [type, setType] = useState(''); // Add type state
   const [credit, setCredit] = useState('');
   const [debit, setDebit] = useState('');
   const [vehicleNo, setVehicleNo] = useState('');
@@ -17,13 +18,14 @@ const Edit = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`https://back-dvw3.onrender.com/items/${itemId}`)
+    axios.get(`http://localhost:5050/items/${itemId}`)
       .then((response) => {
-        const { date, invoice_no, credit, debit, vehicle_no } = response.data;
+        const { date, invoice_no, type, credit, debit, vehicle_no } = response.data; // Include type
         // Format the date to yyyy-MM-dd
         const formattedDate = new Date(date).toISOString().split('T')[0];
         setDate(formattedDate);
         setInvoiceNo(invoice_no);
+        setType(type); // Set type
         setCredit(credit);
         setDebit(debit);
         setVehicleNo(vehicle_no);
@@ -41,6 +43,7 @@ const Edit = () => {
     const data = {
       date,
       invoice_no: invoiceNo,
+      type, // Include type
       credit,
       debit,
       balance: calculatedBalance,
@@ -49,7 +52,7 @@ const Edit = () => {
     };
     setLoading(true);
     axios
-      .put(`https://back-dvw3.onrender.com/items/${itemId}`, data)
+      .put(`http://localhost:5050/items/${itemId}`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Item edited successfully', { variant: 'success' });
@@ -96,6 +99,18 @@ const Edit = () => {
             onChange={(e) => setInvoiceNo(e.target.value)}
             className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
           />
+        </div>
+        <div className="mb-6">
+          <label className="block text-xl font-medium text-gray-700 mb-2">Type</label>
+          <select
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+            className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
+          >
+            <option value="">Select Type</option>
+            <option value="Drum">Drum</option>
+            <option value="Cargo">Cargo</option>
+          </select>
         </div>
         <div className="mb-6">
           <label className="block text-xl font-medium text-gray-700 mb-2">Credit</label>

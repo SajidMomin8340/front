@@ -6,6 +6,7 @@ import { useSnackbar } from 'notistack';
 
 const CreateCompany = () => {
   const [companyName, setCompanyName] = useState('');
+  const [companyAddress, setCompanyAddress] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -13,7 +14,7 @@ const CreateCompany = () => {
   const handleSaveCompany = () => {
     setLoading(true);
     axios
-      .post('https://back-dvw3.onrender.com/company', { name: companyName })
+      .post('http://localhost:5050/company', { name: companyName, address: companyAddress })
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Company Created successfully', { variant: 'success' });
@@ -40,6 +41,18 @@ const CreateCompany = () => {
             type="text"
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
+            className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="companyAddress" className="block text-xl font-medium text-gray-700 mb-2">
+            Address
+          </label>
+          <input
+            id="companyAddress"
+            type="text"
+            value={companyAddress}
+            onChange={(e) => setCompanyAddress(e.target.value)}
             className="border border-gray-300 rounded-md py-2 px-4 w-full focus:outline-none focus:ring-2 focus:ring-sky-600"
           />
         </div>

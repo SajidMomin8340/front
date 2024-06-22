@@ -11,7 +11,7 @@ const Show = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`https://back-dvw3.onrender.com/items/${itemId}`)
+      .get(`http://localhost:5050/items/${itemId}`)
       .then((response) => {
         setItem(response.data);
         setLoading(false);
@@ -41,6 +41,10 @@ const Show = () => {
         <div className="mb-6">
           <label className="block text-xl font-medium text-gray-700 mb-2">Invoice Number</label>
           <p className="border border-gray-300 rounded-md py-2 px-4">{item.invoice_no}</p>
+        </div>
+        <div className="mb-6">
+          <label className="block text-xl font-medium text-gray-700 mb-2">Type</label>
+          <p className="border border-gray-300 rounded-md py-2 px-4">{item.type}</p> {/* Add type field */}
         </div>
         <div className="mb-6">
           <label className="block text-xl font-medium text-gray-700 mb-2">Credit</label>

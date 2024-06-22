@@ -6,16 +6,14 @@ const HighBalanceCompanies = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredItems, setFilteredItems] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get('https://back-dvw3.onrender.com/items/items') // Updated route to fetch items with balance > 200
+      .get('http://localhost:5050/items/items')
       .then((response) => {
-        const highBalanceItems = response.data.data;
+        const highBalanceItems = response.data.data.filter(item => item.company); // Filter out items where company data is deleted
         setItems(highBalanceItems);
-        setFilteredItems(highBalanceItems); // Initialize filtered items with all items
         setLoading(false);
       })
       .catch((error) => {
@@ -41,8 +39,11 @@ const HighBalanceCompanies = () => {
       const lowerCaseQuery = searchQuery.toLowerCase();
       return item.company && item.company.name.toLowerCase().includes(lowerCaseQuery);
     });
-    setFilteredItems(filtered);
+
+    return filtered;
   };
+
+  const filteredItems = handleSearch();
 
   return (
     <div className="p-8">
@@ -84,6 +85,9 @@ const HighBalanceCompanies = () => {
                   Invoice Number
                 </th>
                 <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">
+                  Type
+                </th>
+                <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">
                   Credit
                 </th>
                 <th className="bg-gray-200 p-2 text-gray-600 text-left font-bold md:border md:border-gray-200 block md:table-cell">
@@ -102,10 +106,11 @@ const HighBalanceCompanies = () => {
                 <tr key={item._id} className="bg-white border border-gray-200 md:border-none block md:table-row">
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{index + 1}</td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">
-                    {item.company ? item.company.name : 'Company Is  Deleted'}
+                    {item.company.name}
                   </td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{formatDate(item.date)}</td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.invoice_no}</td>
+                  <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.type}</td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.credit}</td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.debit}</td>
                   <td className="p-2 text-gray-800 md:border md:border-gray-200 block md:table-cell">{item.balance}</td>
